@@ -57,13 +57,13 @@ For TripMate, however, a **single repo structure** provides the best balance bet
 ## 🗂️ Repository Layout
 
 tripmate/
- auth-service/ # Authentication & JWT service
- booking-service/ # Trip booking management
- payment-service/ # Payment handling (mock)
- notification-service/ # Email / push notifications
- gateway-service/ # API gateway (Spring Cloud Gateway)
- config-server/ # Centralized configuration
- eureka-server/ # Service discovery
- common-models/ # Shared DTOs and constants
- docker-compose.yml # Local environment setup
- pom.xml # Parent Maven configuration
+- auth-service/ # Authentication & JWT service
+- booking-service/ # Trip booking management
+- payment-service/ # Payment handling (mock)
+- notification-service/ # Email / push notifications
+- gateway-service/ # API gateway (Spring Cloud Gateway)
+- config-server/ # Centralized configuration
+- eureka-server/ # Service discovery
+- common-models/ # Shared DTOs and constants
+- docker-compose.yml # Local environment setup
+- pom.xml # Parent Maven configuration
