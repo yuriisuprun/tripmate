@@ -31,14 +31,22 @@ wheels/
 .coverage
 htmlcov/
 .tox/
+.coverage.*
 
-# IDE
+# IDE & Editor
 .vscode/
 .idea/
 *.swp
 *.swo
 *~
 .DS_Store
+*.iml
+*.sublime-project
+*.sublime-workspace
+
+# Kiro (AI Development Environment)
+.kiro/
+!.kiro/steering/
 
 # Environment
 .env
@@ -52,3 +60,19 @@ logs/
 # Cache
 .cache/
 *.cache
+.mypy_cache/
+.ruff_cache/
+
+# OS
+Thumbs.db
+.AppleDouble
+.LSOverride
+
+# IDE Workspace
+.vscode/settings.json
+.vscode/launch.json
+.vscode/extensions.json
+
+# Build artifacts
+*.dist-info/
+*.egg-info/
