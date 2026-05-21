@@ -1,54 +1,54 @@
-# Python bytecode / caches
-__pycache__/
-*.py[cod]
-*.pyo
-*.pyd
-*.so
-.pytest_cache/
-.mypy_cache/
-.ruff_cache/
-.pytype/
-
 # Virtual environments
 .venv/
 venv/
 env/
 ENV/
 
-# Packaging / build outputs
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
 build/
+develop-eggs/
 dist/
-*.egg-info/
+downloads/
+eggs/
 .eggs/
-pip-wheel-metadata/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+*.egg-info/
+.installed.cfg
+*.egg
 
-# Test / coverage artifacts
+# Testing
+.pytest_cache/
 .coverage
-.coverage.*
 htmlcov/
-coverage.xml
-junit.xml
+.tox/
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+.DS_Store
+
+# Environment
+.env
+.env.local
+.env.*.local
 
 # Logs
 *.log
+logs/
 
-# Environment / secrets
-.env
-.env.*
-
-# Local storage / runtime data
-data/
-!.gitkeep
-
-# OS / editor
-.DS_Store
-Thumbs.db
-.idea/
-*.iml
-.vscode/
-
-# AI/Agent configuration
-.kiro/
-
-# Docker local overrides
-docker-compose.override.yml
+# Cache
+.cache/
+*.cache
