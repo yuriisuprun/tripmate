@@ -1,0 +1,21 @@
+{
+  "mcpServers": {
+    "repo-assistant": {
+      "command": "python",
+      "args": ["c:\\Users\\yurii\\MyProjects\\git-repo-assistant-mcp\\main.py"],
+      "env": {
+        "GITHUB_TOKEN": "${GITHUB_TOKEN}",
+        "LOG_LEVEL": "INFO",
+        "APP_ENV": "dev"
+      },
+      "disabled": false,
+      "autoApprove": [
+        "get_pull_request",
+        "list_changed_files",
+        "get_diff",
+        "suggest_review_comments",
+        "generate_release_notes"
+      ]
+    }
+  }
+}
