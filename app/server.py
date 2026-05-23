@@ -291,6 +291,7 @@ async def call_tool(name: str, arguments: dict[str, Any]) -> list[TextContent]:
 async def main() -> None:
     """Run the MCP server."""
     import sys
+    import os
     import anyio
     from mcp.server.stdio import stdio_server
 
@@ -300,18 +301,34 @@ async def main() -> None:
     logger.info("Starting repo-assistant-mcp server")
     logger.info(f"Environment: {settings.app_env}")
 
-    try:
-        async with stdio_server(server) as (read_stream, write_stream):
-            logger.info("Server running. Press Ctrl+C to exit.")
-            await server.run(read_stream, write_stream, None)
-    except (KeyboardInterrupt, EOFError):
-        logger.info("Server stopped.")
-    except BaseException as e:
-        if "unhandled errors in a TaskGroup" in str(e):
+    # Check if running in dev mode (when stdin is not a pipe)
+    dev_mode = os.environ.get("DEV_MODE", "").lower() == "true"
+    
+    if dev_mode or (hasattr(sys.stdin, "isatty") and sys.stdin.isatty()):
+        logger.warning("Running in development mode (stdio not piped)")
+        logger.info("This server is designed to run as an MCP server via stdio.")
+        logger.info("To use it properly, configure it in your MCP client config.")
+        logger.info("For testing, use: DEV_MODE=true python main.py")
+        
+        # Keep the process alive for testing
+        try:
+            while True:
+                await anyio.sleep(1)
+        except (KeyboardInterrupt, EOFError):
             logger.info("Server stopped.")
-        else:
-            logger.error(f"Server error: {e}", exc_info=True)
-            raise
+    else:
+        try:
+            async with stdio_server(server) as (read_stream, write_stream):
+                logger.info("Server running. Press Ctrl+C to exit.")
+                await server.run(read_stream, write_stream, None)
+        except (KeyboardInterrupt, EOFError):
+            logger.info("Server stopped.")
+        except BaseException as e:
+            if "unhandled errors in a TaskGroup" in str(e):
+                logger.info("Server stopped.")
+            else:
+                logger.error(f"Server error: {e}", exc_info=True)
+                raise
 
 
 if __name__ == "__main__":
