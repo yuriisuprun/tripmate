@@ -2,7 +2,7 @@
   "mcpServers": {
     "repo-assistant": {
       "command": "python",
-      "args": ["c:\\Users\\yurii\\MyProjects\\git-repo-assistant-mcp\\main.py"],
+      "args": ["C:\\Users\\yurii\\MyProjects\\git-repo-assistant-mcp\\main.py"],
       "env": {
         "GITHUB_TOKEN": "${GITHUB_TOKEN}",
         "LOG_LEVEL": "INFO",
