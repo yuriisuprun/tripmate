@@ -290,15 +290,28 @@ async def call_tool(name: str, arguments: dict[str, Any]) -> list[TextContent]:
 
 async def main() -> None:
     """Run the MCP server."""
+    import sys
+    import anyio
+    from mcp.server.stdio import stdio_server
+
     settings = get_settings()
     setup_logging(settings.log_level)
 
     logger.info("Starting repo-assistant-mcp server")
     logger.info(f"Environment: {settings.app_env}")
 
-    async with server:
-        logger.info("Server running. Press Ctrl+C to exit.")
-        await server.wait_for_shutdown()
+    try:
+        async with stdio_server(server) as (read_stream, write_stream):
+            logger.info("Server running. Press Ctrl+C to exit.")
+            await server.run(read_stream, write_stream, None)
+    except (KeyboardInterrupt, EOFError):
+        logger.info("Server stopped.")
+    except BaseException as e:
+        if "unhandled errors in a TaskGroup" in str(e):
+            logger.info("Server stopped.")
+        else:
+            logger.error(f"Server error: {e}", exc_info=True)
+            raise
 
 
 if __name__ == "__main__":
