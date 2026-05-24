@@ -16,6 +16,7 @@ if __name__ == "__main__":
         print("\nServer stopped.")
         sys.exit(0)
     except BaseException as e:
+
         # Check if this is a normal shutdown (TaskGroup with EOF/stdin closed)
         if "unhandled errors in a TaskGroup" in str(e):
             sys.exit(0)
